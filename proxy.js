@@ -6,7 +6,7 @@ httpMaster.on('logError', function(msg) {
   console.warn(msg);
 });
 httpMaster.on('logNotice', function(msg) {
-  //console.log(msg);
+//  console.log(msg);
 });
 
 var masterConfig = {
@@ -21,29 +21,32 @@ var routeVnc = [
 
     return {
       requestHandler: function(req, res, next) {
+        if(!req.upgrade) return next();
         var targetMachine = parseInt(req.match[0]);
-        if(!targetMachine) return next();
-
-        var req = http.get({
+        if(!targetMachine) return req.upgrade.socket.end();
+        var httpReq = http.get({
+          host: config.railsHost,
           hostname: config.railsHost,
           port: config.railsPort,
           headers: req.headers,
           path: '/machines/' + targetMachine + '/vnc.json'
         }, function(res) {
           res.setEncoding('utf8');
-          res.on('data', function(data) {
+          res.once('data', function(data) {
             try {
               data = JSON.parse(data);
-              if(data.port == -1)
-                next();
+              if(!data.port || !data.host || data.port == -1 )
+                return req.upgrade.socket.end();
               req.match = data;
               next();
             } catch(err) {
-              next();
+              req.upgrade.socket.end()
             }
           });
         });
-        req.on('error', next);
+        httpReq.once('error', function() {
+					req.upgrade.socket.end();
+        });
       }
     };
   }, 'websockify -> [host]:[port]' ];
