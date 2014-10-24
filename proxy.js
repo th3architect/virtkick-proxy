@@ -24,7 +24,7 @@ var routeVnc = [
         var targetMachine = parseInt(req.match[0]);
         if(!targetMachine) return next();
 
-        http.get({
+        var req = http.get({
           hostname: config.railsHost,
           port: config.railsPort,
           headers: req.headers,
@@ -39,11 +39,11 @@ var routeVnc = [
               req.match = data;
               next();
             } catch(err) {
-              console.log(err);
               next();
             }
           });
         });
+        req.on('error', next);
       }
     };
   }, 'websockify -> [host]:[port]' ];
@@ -68,5 +68,5 @@ httpMaster.init({
   ports: ports
 }, function(err) {
   if(err) throw err;
-  console.log("Started");
+  console.log("HTTP started, available at http://localhost:" + masterConfig.port);
 });
