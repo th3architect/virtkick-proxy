@@ -6,7 +6,7 @@ httpMaster.on('logError', function(msg) {
   console.warn(msg);
 });
 httpMaster.on('logNotice', function(msg) {
-  console.log(msg);
+  //console.log(msg);
 });
 
 var masterConfig = {
