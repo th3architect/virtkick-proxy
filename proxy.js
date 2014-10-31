@@ -64,7 +64,10 @@ var portImplementation = {
 var ports = {};
 ports[masterConfig.port] = portImplementation;
 
+var path = require('path');
+
 httpMaster.init({
+  errorHtmlFile: path.join(__dirname, 'error.html'),
   railsPort: masterConfig.railsPort,
   railsHost: masterConfig.railsHost,
   workerCount: 4,
