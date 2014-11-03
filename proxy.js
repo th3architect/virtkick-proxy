@@ -66,13 +66,15 @@ ports[masterConfig.port] = portImplementation;
 
 var path = require('path');
 
-httpMaster.init({
+var config = {
   errorHtmlFile: path.join(__dirname, 'error.html'),
   railsPort: masterConfig.railsPort,
   railsHost: masterConfig.railsHost,
   workerCount: 4,
   ports: ports
-}, function(err) {
+};
+
+httpMaster.init(config, function(err) {
   if(err) throw err;
-  console.log("HTTP started, available at http://localhost:" + masterConfig.port);
+  console.log("HTTP started, available at http://0.0.0.0:" + masterConfig.port);
 });
