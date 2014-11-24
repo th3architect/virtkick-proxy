@@ -14,6 +14,12 @@ That's the VirtKick Proxy. It a few things:
 - wraps VNC with websockets using websockify library as long as user is authorized to access it
 - will serve static files in future
 
+<p align="center">
+  <a href="https://www.indiegogo.com/projects/virtkick-take-cloud-back">
+    <img src="https://raw.github.com/virtkick/virtkick/master/indiegogo.png" />
+  </a>
+</p>
+
 ## Issues
 
 Report bugs and feature requests in [virtkick](https://github.com/virtkick/virtkick) meta-project.
