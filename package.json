@@ -17,6 +17,6 @@
   },
   "homepage": "https://www.virtkick.io/",
   "dependencies": {
-    "http-master": "1.0.2"
+    "http-master": "1.0.5"
   }
 }
