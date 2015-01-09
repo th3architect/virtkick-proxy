@@ -4,14 +4,19 @@
     <meta charset="utf-8">
     <title>VirtKick is loading</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
       body {
         font-family: 'Open Sans', sans-serif;
         color: #94828c;
-        background-color: #white;
+        background-color: white;
       }
 
-      #mask #rocket-window.animate {
+      #rocket-window {
+        fill: #ec4863;
+      }
+
+      #rocket-window.animate {
         -moz-animation: move-mask infinite running 1.3s ease;
         -webkit-animation: move-mask infinite running 1.3s ease;
         animation: move-mask infinite running 1.3s ease;
@@ -19,65 +24,95 @@
 
       @-moz-keyframes move-mask {
         0%, 25% {
-          -webkit-transform: translateY(0px);
-                  transform: translateY(0px);
+          -moz-transform: translateY(0px);
+        }
+        30% {
+          opacity: 1;
         }
         50% {
-          -webkit-transform: translateY(75px);
-                  transform: translateY(75px);
+          opacity: 0;
+          -moz-transform: translateY(125px);
         }
         51% {
-          -webkit-transform: translateY(-75px);
-                  transform: translateY(-75px);
+          -moz-transform: translateY(-125px);
+        }
+        70% {
+          opacity: 1;
         }
         75%, 100% {
-          -webkit-transform: translateY(0px);
-                  transform: translateY(0px);
+          -moz-transform: translateY(0px);
         }
       }
+      
       @-webkit-keyframes move-mask {
         0%, 25% {
           -webkit-transform: translateY(0px);
-                  transform: translateY(0px);
+        }
+        49% {
+          opacity: 1;
         }
         50% {
-          -webkit-transform: translateY(75px);
-                  transform: translateY(75px);
+          opacity: 0;
+          -webkit-transform: translateY(125px);
         }
         51% {
-          -webkit-transform: translateY(-75px);
-                  transform: translateY(-75px);
+          -webkit-transform: translateY(-125px);
+        }
+        52% {
+          opacity: 1;
         }
         75%, 100% {
           -webkit-transform: translateY(0px);
-                  transform: translateY(0px);
         }
       }
+      
       @keyframes move-mask {
         0%, 25% {
-          -webkit-transform: translateY(0px);
-                  transform: translateY(0px);
+          transform: translateY(0px);
+        }
+        49% {
+          opacity: 1;
         }
         50% {
-          -webkit-transform: translateY(75px);
-                  transform: translateY(75px);
+          opacity: 0;
+          transform: translateY(125px);
         }
         51% {
-          -webkit-transform: translateY(-75px);
-                  transform: translateY(-75px);
+          transform: translateY(-125px);
+        }
+        52% {
+          opacity: 1;
         }
         75%, 100% {
-          -webkit-transform: translateY(0px);
-                  transform: translateY(0px);
+          transform: translateY(0px);
         }
       }
+
       .wrapper {
         position: absolute;
         top: 50%;
         right: 50%;
         margin-top: -170px;
-        margin-right: -400px;
-        width: 800px;
+        margin-right: -255px;
+        width: 510px;
+        opacity: 0;
+           -moz-transition: opacity 0.5s ease-out;
+        -webkit-transition: opacity 0.5s ease-out;
+                transition: opacity 0.5s ease-out;
+      }
+      .wrapper.show {
+        opacity: 1;
+      }
+      @media (max-width: 727px) {
+        .wrapper {
+          right: 0%;
+          margin-top: -40px;
+          margin-right: 0px;
+          width: 100%;
+        }
+        .wrapper #hello {
+          display: none;
+        }
       }
       .wrapper .wrapper-inner {
         position: relative;
@@ -110,9 +145,6 @@
         -webkit-transition: bottom 0.45s ease-out;
                 transition: bottom 0.45s ease-out;
         bottom: 10px;
-        /* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=1118710 */
-        -moz-animation: move-mask infinite running 1.3s ease-in;
-        -moz-animation-direction: reverse;
       }
       .wrapper p {
         display: none;
@@ -127,6 +159,13 @@
         width: 470px;
         padding: 40px 20px 40px 20px;
         text-align: center;
+        opacity: 0;
+           -moz-transition: opacity 1.0s ease-out;
+        -webkit-transition: opacity 1.0s ease-out;
+                transition: opacity 1.0s ease-out;
+      }
+      .wrapper #hello.show {
+        opacity: 1;
       }
       .wrapper #hello h2 {
         font-size: 20px;
@@ -143,18 +182,13 @@
     </style>
   </head>
   <body>
-    <div class="wrapper">
+    <div id="wrapper" class="wrapper">
       <div class="wrapper-inner">
         <div class="preloader">
           <svg id="rocket" version="1.1" x="0px" y="0px"
              width="56px" height="56px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-            <defs>
-              <mask id="mask">
-                <path id="rocket-window" fill="#FFFFFF" d="M71-91H57l-4,0v344h22V-91L71-91z M71,57L71,57c-0.1,3.8-3.2,7-7,7s-6.9-3.2-7-7l0,0l0,0c0-3.9,3.1-7,7-7 S71,53.1,71,57L71,57z" />
-                <path fill="#FFFFFF" d="M105.8720703,99.5673828c-3.203125-6.4755859-9.4960938-13.8730469-14.03125-14.6933594 c0.0810547-6.0292969-0.1259766-12.2871094-0.8457031-18.171875c-0.8808594-7.1835938-4.1533203-24.5083008-9.3388672-36.809082 C74.3632813,12.6083984,64.0126953,0.015625,64.0126953,0.015625S53.6621094,12.6083984,46.3691406,29.8930664 c-5.1855469,12.3007813-8.4580078,29.6254883-9.3388672,36.809082c-0.71875,5.8701172-0.9257813,12.1103516-0.8466797,18.125 c-4.5371094,0.7998047-10.8466797,8.2119141-14.0488281,14.703125c-3.0820313,6.2324219-3.4267578,28.4121094-3.4267578,28.4121094 l18.7070313-9.8525391c0,0,0.4462891-1.7773438,1.0253906-4.4970703c0.2382813,1.7080078,0.4130859,2.8095703,0.4628906,3.1123047 v2.8505859c0,2.4628906,1.9873047,4.4599609,4.4394531,4.4599609h41.3369141c2.4521484,0,4.4394531-1.9970703,4.4394531-4.4599609 v-2.8320313c0.0429688-0.2626953,0.2148438-1.3359375,0.4521484-3.0341797 c0.5732422,2.6884766,1.0136719,4.4423828,1.0136719,4.4423828l18.7070313,9.8525391 C109.2919922,127.984375,108.9482422,105.7998047,105.8720703,99.5673828z M70.9072266,110.1669922H57.1181641V31.8334961 L64,21.918457l6.9072266,9.9150391V110.1669922z" />
-              </mask>
-            </defs>
-            <path mask="url(#mask)" fill="#FFFFFF" d="M105.8720703,99.5673828c-3.203125-6.4755859-9.4960938-13.8730469-14.03125-14.6933594 c0.0810547-6.0292969-0.1259766-12.2871094-0.8457031-18.171875c-0.8808594-7.1835938-4.1533203-24.5083008-9.3388672-36.809082 C74.3632813,12.6083984,64.0126953,0.015625,64.0126953,0.015625S53.6621094,12.6083984,46.3691406,29.8930664 c-5.1855469,12.3007813-8.4580078,29.6254883-9.3388672,36.809082c-0.71875,5.8701172-0.9257813,12.1103516-0.8466797,18.125 c-4.5371094,0.7998047-10.8466797,8.2119141-14.0488281,14.703125c-3.0820313,6.2324219-3.4267578,28.4121094-3.4267578,28.4121094 l18.7070313-9.8525391c0,0,0.4462891-1.7773438,1.0253906-4.4970703c0.2382813,1.7080078,0.4130859,2.8095703,0.4628906,3.1123047 v2.8505859c0,2.4628906,1.9873047,4.4599609,4.4394531,4.4599609h41.3369141c2.4521484,0,4.4394531-1.9970703,4.4394531-4.4599609 v-2.8320313c0.0429688-0.2626953,0.2148438-1.3359375,0.4521484-3.0341797 c0.5732422,2.6884766,1.0136719,4.4423828,1.0136719,4.4423828l18.7070313,9.8525391C109.2919922,127.984375,108.9482422,105.7998047,105.8720703,99.5673828z" />
+            <path fill="#FFFFFF" d="M105.8720703,99.5673828c-3.203125-6.4755859-9.4960938-13.8730469-14.03125-14.6933594 c0.0810547-6.0292969-0.1259766-12.2871094-0.8457031-18.171875c-0.8808594-7.1835938-4.1533203-24.5083008-9.3388672-36.809082 C74.3632813,12.6083984,64.0126953,0.015625,64.0126953,0.015625S53.6621094,12.6083984,46.3691406,29.8930664 c-5.1855469,12.3007813-8.4580078,29.6254883-9.3388672,36.809082c-0.71875,5.8701172-0.9257813,12.1103516-0.8466797,18.125 c-4.5371094,0.7998047-10.8466797,8.2119141-14.0488281,14.703125c-3.0820313,6.2324219-3.4267578,28.4121094-3.4267578,28.4121094 l18.7070313-9.8525391c0,0,0.4462891-1.7773438,1.0253906-4.4970703c0.2382813,1.7080078,0.4130859,2.8095703,0.4628906,3.1123047 v2.8505859c0,2.4628906,1.9873047,4.4599609,4.4394531,4.4599609h41.3369141c2.4521484,0,4.4394531-1.9970703,4.4394531-4.4599609 v-2.8320313c0.0429688-0.2626953,0.2148438-1.3359375,0.4521484-3.0341797 c0.5732422,2.6884766,1.0136719,4.4423828,1.0136719,4.4423828l18.7070313,9.8525391C109.2919922,127.984375,108.9482422,105.7998047,105.8720703,99.5673828z" />
+            <path id="rocket-window" fill="#FFFFFF" d="M64,50c-3.8662109,0-7,3.1337891-7,7c0.0976563,3.78125,3.1953125,7,7,7s6.9013672-3.21875,7-7 C71,53.1337891,67.8662109,50,64,50z"/>
           </svg>
         </div>
         <div id="hello">
@@ -164,6 +198,8 @@
       </div>
     </div>
     <script type="text/javascript">
+    var wrapper = document.getElementById("wrapper");
+    var hello = document.getElementById("hello");
     var rocket = document.getElementById("rocket");
     var rocketWindow = document.getElementById("rocket-window");
     
@@ -187,6 +223,11 @@
       }, 1000);
     };
 
+
+    wrapper.setAttribute('class', 'wrapper show');
+    setTimeout(function () {
+      hello.setAttribute('class', 'show');
+    }, 500);
     flyIn();
     
     var probe = setInterval(function () {
@@ -196,6 +237,7 @@
       request.onload = function() {
         if (request.status >= 200 && request.status < 400) {                
           clearInterval(probe);
+          wrapper.setAttribute('class', 'wrapper');
           flyOut(function () {
             document.location.reload();
           });
