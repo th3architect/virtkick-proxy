@@ -110,6 +110,9 @@
         -webkit-transition: bottom 0.45s ease-out;
                 transition: bottom 0.45s ease-out;
         bottom: 10px;
+        /* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=1118710 */
+        -moz-animation: move-mask infinite running 1.3s ease-in;
+        -moz-animation-direction: reverse;
       }
       .wrapper p {
         display: none;
