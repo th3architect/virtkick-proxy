@@ -3,164 +3,204 @@
   <head>
     <meta charset="utf-8">
     <title>VirtKick is loading</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <style>
-      ::-moz-selection {
-        background: #b3d4fc;
-        text-shadow: none;
-      }
-
-      ::selection {
-        background: #b3d4fc;
-        text-shadow: none;
-      }
-
-      html {
-        padding: 30px 10px;
-        font-size: 20px;
-        line-height: 1.4;
-        color: #737373;
-        background: #f0f0f0;
-        -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%;
-      }
-
-      html,
-      input {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      }
-
       body {
-        max-width: 750px;
-        _width: 750px;
-        padding: 30px 20px 50px;
-        border: 1px solid #b3b3b3;
-        border-radius: 4px;
-        margin: 0 auto;
-        box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
-        background: #fcfcfc;
+        font-family: 'Open Sans', sans-serif;
+        color: #94828c;
+        background-color: #white;
       }
 
-      h1 {
-        margin: 0 10px;
-        font-size: 50px;
+      #mask #rocket-window.animate {
+        -moz-animation: move-mask infinite running 1.3s ease;
+        -webkit-animation: move-mask infinite running 1.3s ease;
+        animation: move-mask infinite running 1.3s ease;
+      }
+
+      @-moz-keyframes move-mask {
+        0%, 25% {
+          -webkit-transform: translateY(0px);
+                  transform: translateY(0px);
+        }
+        50% {
+          -webkit-transform: translateY(75px);
+                  transform: translateY(75px);
+        }
+        51% {
+          -webkit-transform: translateY(-75px);
+                  transform: translateY(-75px);
+        }
+        75%, 100% {
+          -webkit-transform: translateY(0px);
+                  transform: translateY(0px);
+        }
+      }
+      @-webkit-keyframes move-mask {
+        0%, 25% {
+          -webkit-transform: translateY(0px);
+                  transform: translateY(0px);
+        }
+        50% {
+          -webkit-transform: translateY(75px);
+                  transform: translateY(75px);
+        }
+        51% {
+          -webkit-transform: translateY(-75px);
+                  transform: translateY(-75px);
+        }
+        75%, 100% {
+          -webkit-transform: translateY(0px);
+                  transform: translateY(0px);
+        }
+      }
+      @keyframes move-mask {
+        0%, 25% {
+          -webkit-transform: translateY(0px);
+                  transform: translateY(0px);
+        }
+        50% {
+          -webkit-transform: translateY(75px);
+                  transform: translateY(75px);
+        }
+        51% {
+          -webkit-transform: translateY(-75px);
+                  transform: translateY(-75px);
+        }
+        75%, 100% {
+          -webkit-transform: translateY(0px);
+                  transform: translateY(0px);
+        }
+      }
+      .wrapper {
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        margin-top: -170px;
+        margin-right: -400px;
+        width: 800px;
+      }
+      .wrapper .wrapper-inner {
+        position: relative;
+      }
+      .wrapper .wrapper-inner .preloader {
+        border-radius: 4px;
+        background-color: #ec4863;
+        position: relative;
+        overflow: hidden;
+        display: block;
+        margin: 0 auto;
+        width: 80px;
+        height: 80px;
+      }
+      .wrapper .wrapper-inner .preloader #rocket {
+        overflow: hidden;
+        position: absolute;
+        left: 12px;
+        bottom: -114px;
+        z-index: 2;
+      }
+      .wrapper .wrapper-inner .preloader #rocket.flyaway {
+        -moz-transition: bottom 0.45s ease-out 0.40s;
+        -webkit-transition: bottom 0.45s ease-out 0.40s;
+                transition: bottom 0.45s ease-out 0.40s;
+        bottom: 114px;
+      }
+      .wrapper .wrapper-inner .preloader #rocket.flying {
+        -moz-transition: bottom 0.45s ease-out;
+        -webkit-transition: bottom 0.45s ease-out;
+                transition: bottom 0.45s ease-out;
+        bottom: 10px;
+      }
+      .wrapper p {
+        display: none;
+        margin-top: 30px;
         text-align: center;
       }
-
-      h1 span {
-        color: #bbb;
-      }
-
-      h3 {
-        margin: 1.5em 0 0.5em;
-      }
-
-      p {
-        margin: 1em 0;
-      }
-
-      ul {
-        padding: 0 0 0 40px;
-        margin: 1em 0;
-      }
-
-      .container {
-        position: relative;
+      .wrapper #hello {
+        border-radius: 4px;
         margin: 0 auto;
+        margin-top: 15px;
+        background-color: #f4f2e9;
+        width: 470px;
+        padding: 40px 20px 40px 20px;
+        text-align: center;
       }
-
-      /* google search */
-
-      #goog-fixurl ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+      .wrapper #hello h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
       }
-
-      #goog-fixurl form {
-        margin: 0;
+      .wrapper #hello h2 .highlight {
+        color: #ec4863;
       }
-
-      #goog-wm-qt,
-      #goog-wm-sb {
-        border: 1px solid #bbb;
-        font-size: 16px;
-        line-height: normal;
-        vertical-align: top;
-        color: #444;
-        border-radius: 2px;
-      }
-
-      #goog-wm-qt {
-        width: 220px;
-        height: 20px;
-        padding: 5px;
-        margin: 5px 10px 0 0;
-        box-shadow: inset 0 1px 1px #ccc;
-      }
-
-      #goog-wm-sb {
-        display: inline-block;
-        height: 32px;
-        padding: 0 10px;
-        margin: 5px 0 0;
-        white-space: nowrap;
-        cursor: pointer;
-        background-color: #f5f5f5;
-        background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0), #f1f1f1);
-        background-image: -moz-linear-gradient(rgba(255, 255, 255, 0), #f1f1f1);
-        background-image: -ms-linear-gradient(rgba(255, 255, 255, 0), #f1f1f1);
-        background-image: -o-linear-gradient(rgba(255, 255, 255, 0), #f1f1f1);
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        *overflow: visible;
-        *display: inline;
-        *zoom: 1;
-      }
-
-      #goog-wm-sb:hover,
-      #goog-wm-sb:focus {
-        border-color: #aaa;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-        background-color: #f8f8f8;
-      }
-
-      #goog-wm-qt:hover,
-      #goog-wm-qt:focus {
-        border-color: #105cb6;
-        outline: 0;
-        color: #222;
-      }
-
-      input::-moz-focus-inner {
-        padding: 0;
-        border: 0;
-      }
-
-      .loading {
-        position: absolute;
-        top: 170px;
-        left: 350px;
-
-        font-size: 40px;
+      .wrapper #hello p {
+        margin-top: 15px;
+        font-size: 15px;
+        display: block;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-
-			<img src="virtkick-logo.png">
-      <div class="loading">is loading<span id="dots"></span></div>
+    <div class="wrapper">
+      <div class="wrapper-inner">
+        <div class="preloader">
+          <svg id="rocket" version="1.1" x="0px" y="0px"
+             width="56px" height="56px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+            <defs>
+              <mask id="mask">
+                <path id="rocket-window" fill="#FFFFFF" d="M71-91H57l-4,0v344h22V-91L71-91z M71,57L71,57c-0.1,3.8-3.2,7-7,7s-6.9-3.2-7-7l0,0l0,0c0-3.9,3.1-7,7-7 S71,53.1,71,57L71,57z" />
+                <path fill="#FFFFFF" d="M105.8720703,99.5673828c-3.203125-6.4755859-9.4960938-13.8730469-14.03125-14.6933594 c0.0810547-6.0292969-0.1259766-12.2871094-0.8457031-18.171875c-0.8808594-7.1835938-4.1533203-24.5083008-9.3388672-36.809082 C74.3632813,12.6083984,64.0126953,0.015625,64.0126953,0.015625S53.6621094,12.6083984,46.3691406,29.8930664 c-5.1855469,12.3007813-8.4580078,29.6254883-9.3388672,36.809082c-0.71875,5.8701172-0.9257813,12.1103516-0.8466797,18.125 c-4.5371094,0.7998047-10.8466797,8.2119141-14.0488281,14.703125c-3.0820313,6.2324219-3.4267578,28.4121094-3.4267578,28.4121094 l18.7070313-9.8525391c0,0,0.4462891-1.7773438,1.0253906-4.4970703c0.2382813,1.7080078,0.4130859,2.8095703,0.4628906,3.1123047 v2.8505859c0,2.4628906,1.9873047,4.4599609,4.4394531,4.4599609h41.3369141c2.4521484,0,4.4394531-1.9970703,4.4394531-4.4599609 v-2.8320313c0.0429688-0.2626953,0.2148438-1.3359375,0.4521484-3.0341797 c0.5732422,2.6884766,1.0136719,4.4423828,1.0136719,4.4423828l18.7070313,9.8525391 C109.2919922,127.984375,108.9482422,105.7998047,105.8720703,99.5673828z M70.9072266,110.1669922H57.1181641V31.8334961 L64,21.918457l6.9072266,9.9150391V110.1669922z" />
+              </mask>
+            </defs>
+            <path mask="url(#mask)" fill="#FFFFFF" d="M105.8720703,99.5673828c-3.203125-6.4755859-9.4960938-13.8730469-14.03125-14.6933594 c0.0810547-6.0292969-0.1259766-12.2871094-0.8457031-18.171875c-0.8808594-7.1835938-4.1533203-24.5083008-9.3388672-36.809082 C74.3632813,12.6083984,64.0126953,0.015625,64.0126953,0.015625S53.6621094,12.6083984,46.3691406,29.8930664 c-5.1855469,12.3007813-8.4580078,29.6254883-9.3388672,36.809082c-0.71875,5.8701172-0.9257813,12.1103516-0.8466797,18.125 c-4.5371094,0.7998047-10.8466797,8.2119141-14.0488281,14.703125c-3.0820313,6.2324219-3.4267578,28.4121094-3.4267578,28.4121094 l18.7070313-9.8525391c0,0,0.4462891-1.7773438,1.0253906-4.4970703c0.2382813,1.7080078,0.4130859,2.8095703,0.4628906,3.1123047 v2.8505859c0,2.4628906,1.9873047,4.4599609,4.4394531,4.4599609h41.3369141c2.4521484,0,4.4394531-1.9970703,4.4394531-4.4599609 v-2.8320313c0.0429688-0.2626953,0.2148438-1.3359375,0.4521484-3.0341797 c0.5732422,2.6884766,1.0136719,4.4423828,1.0136719,4.4423828l18.7070313,9.8525391C109.2919922,127.984375,108.9482422,105.7998047,105.8720703,99.5673828z" />
+          </svg>
+        </div>
+        <div id="hello">
+          <h2><span class="highlight">Hello</span>, how are you?</h2>
+          <p>Please wait a moment while we set up things for you...</p>
+        </div>
+      </div>
     </div>
-    <script>
-      var cnt = 0;
-      var dots = ['', '.', '..', '...', '....', '.....'];
-      setInterval(function() {
-        document.getElementById('dots').innerHTML = dots[cnt % (dots.length)];
-        cnt += 1;
-        if(cnt >= 6) { document.location.reload(); }
-      }, 500);
+    <script type="text/javascript">
+    var rocket = document.getElementById("rocket");
+    var rocketWindow = document.getElementById("rocket-window");
+    
+    var flyIn = function () {
+      setTimeout(function () {
+        rocket.setAttribute('class', 'flying');
+        setTimeout(function () {
+          rocketWindow.setAttribute('class', 'animate');
+        }, 450);
+      }, 250);
+    };
+    
+    var flyOut = function (callback) {
+      rocket.setAttribute('class', 'flyaway');
+      rocketWindow.setAttribute('class', '');
+      setTimeout(function(){
+        rocket.setAttribute('class', '');
+        if (callback) {
+          callback();
+        }
+      }, 1000);
+    };
 
+    flyIn();
+    
+    var probe = setInterval(function () {
+      var request = new XMLHttpRequest();
+      request.open('GET', document.location, true);
+
+      request.onload = function() {
+        if (request.status >= 200 && request.status < 400) {                
+          clearInterval(probe);
+          flyOut(function () {
+            document.location.reload();
+          });
+        } 
+      };
+
+      request.send();
+    }, 500);
     </script>
   </body>
 </html>
