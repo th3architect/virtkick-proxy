@@ -13,77 +13,89 @@
       }
 
       #rocket-window {
-        fill: #ec4863;
+        position: absolute;
+        top: 44%;
+        right: 50%;
+        margin-right: -3px;
+        margin-top: 0px;
+        width: 6px;
+        height: 6px;
+        background-color: #ec4863;
+        border-radius: 3px;
       }
 
-      #rocket-window.animate {
-        -moz-animation: move-mask infinite running 1.3s ease;
-        -webkit-animation: move-mask infinite running 1.3s ease;
-        animation: move-mask infinite running 1.3s ease;
+      #rocket-wrapper.animate #rocket-window {
+        -moz-animation: movewindow 1.3s infinite;
+        -webkit-animation: movewindow 1.3s infinite;
+        animation: movewindow 1.3s infinite;
       }
 
-      @-moz-keyframes move-mask {
+      @-moz-keyframes movewindow {
         0%, 25% {
           -moz-transform: translateY(0px);
         }
         30% {
-          opacity: 1;
+          visibility: visible;
         }
         50% {
-          opacity: 0;
+          visibility: hidden;
           -moz-transform: translateY(125px);
         }
         51% {
           -moz-transform: translateY(-125px);
         }
         70% {
-          opacity: 1;
+          visibility: visible;
         }
         75%, 100% {
           -moz-transform: translateY(0px);
         }
       }
       
-      @-webkit-keyframes move-mask {
+      @-webkit-keyframes movewindow {
         0%, 25% {
           -webkit-transform: translateY(0px);
         }
         49% {
-          opacity: 1;
+          visibility: visible;
         }
         50% {
-          opacity: 0;
+          visibility: hidden;
           -webkit-transform: translateY(125px);
         }
         51% {
           -webkit-transform: translateY(-125px);
         }
         52% {
-          opacity: 1;
+          visibility: visible;
         }
         75%, 100% {
           -webkit-transform: translateY(0px);
         }
       }
       
-      @keyframes move-mask {
+      @keyframes movewindow {
         0%, 25% {
+          -webkit-transform: translateY(0px);
           transform: translateY(0px);
         }
         49% {
-          opacity: 1;
+          visibility: visible;
         }
         50% {
-          opacity: 0;
+          visibility: hidden;
+          -webkit-transform: translateY(0px);
           transform: translateY(125px);
         }
         51% {
+          -webkit-transform: translateY(0px);
           transform: translateY(-125px);
         }
         52% {
-          opacity: 1;
+          visibility: visible;
         }
         75%, 100% {
+          -webkit-transform: translateY(0px);
           transform: translateY(0px);
         }
       }
@@ -127,24 +139,29 @@
         width: 80px;
         height: 80px;
       }
-      .wrapper .wrapper-inner .preloader #rocket {
+      .wrapper .wrapper-inner .preloader #rocket-wrapper {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        padding: 17%;
+        box-sizing: border-box;
+        -moz-transition: top 0.45s ease-out;
+        -webkit-transition: top 0.45s ease-out;
+                transition: top 0.45s ease-out;
+      }
+      .wrapper .wrapper-inner .preloader #rocket-wrapper #rocket {
         overflow: hidden;
-        position: absolute;
-        left: 12px;
-        bottom: -114px;
-        z-index: 2;
+        position: relative;
+        left: 0;
+        top: 0;
       }
-      .wrapper .wrapper-inner .preloader #rocket.flyaway {
-        -moz-transition: bottom 0.45s ease-out 0.40s;
-        -webkit-transition: bottom 0.45s ease-out 0.40s;
-                transition: bottom 0.45s ease-out 0.40s;
-        bottom: 114px;
+      .wrapper .wrapper-inner .preloader #rocket-wrapper.flyover {
+        top: -100%;
       }
-      .wrapper .wrapper-inner .preloader #rocket.flying {
-        -moz-transition: bottom 0.45s ease-out;
-        -webkit-transition: bottom 0.45s ease-out;
-                transition: bottom 0.45s ease-out;
-        bottom: 10px;
+      .wrapper .wrapper-inner .preloader #rocket-wrapper.underneath {
+        top: 100%;
       }
       .wrapper p {
         display: none;
@@ -160,9 +177,9 @@
         padding: 40px 20px 40px 20px;
         text-align: center;
         opacity: 0;
-           -moz-transition: opacity 1.0s ease-out;
-        -webkit-transition: opacity 1.0s ease-out;
-                transition: opacity 1.0s ease-out;
+           -moz-transition: opacity 0.7s ease-out;
+        -webkit-transition: opacity 0.7s ease-out;
+                transition: opacity 0.7s ease-out;
       }
       .wrapper #hello.show {
         opacity: 1;
@@ -185,11 +202,13 @@
     <div id="wrapper" class="wrapper">
       <div class="wrapper-inner">
         <div class="preloader">
-          <svg id="rocket" version="1.1" x="0px" y="0px"
-             width="56px" height="56px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-            <path fill="#FFFFFF" d="M105.8720703,99.5673828c-3.203125-6.4755859-9.4960938-13.8730469-14.03125-14.6933594 c0.0810547-6.0292969-0.1259766-12.2871094-0.8457031-18.171875c-0.8808594-7.1835938-4.1533203-24.5083008-9.3388672-36.809082 C74.3632813,12.6083984,64.0126953,0.015625,64.0126953,0.015625S53.6621094,12.6083984,46.3691406,29.8930664 c-5.1855469,12.3007813-8.4580078,29.6254883-9.3388672,36.809082c-0.71875,5.8701172-0.9257813,12.1103516-0.8466797,18.125 c-4.5371094,0.7998047-10.8466797,8.2119141-14.0488281,14.703125c-3.0820313,6.2324219-3.4267578,28.4121094-3.4267578,28.4121094 l18.7070313-9.8525391c0,0,0.4462891-1.7773438,1.0253906-4.4970703c0.2382813,1.7080078,0.4130859,2.8095703,0.4628906,3.1123047 v2.8505859c0,2.4628906,1.9873047,4.4599609,4.4394531,4.4599609h41.3369141c2.4521484,0,4.4394531-1.9970703,4.4394531-4.4599609 v-2.8320313c0.0429688-0.2626953,0.2148438-1.3359375,0.4521484-3.0341797 c0.5732422,2.6884766,1.0136719,4.4423828,1.0136719,4.4423828l18.7070313,9.8525391C109.2919922,127.984375,108.9482422,105.7998047,105.8720703,99.5673828z" />
-            <path id="rocket-window" fill="#FFFFFF" d="M64,50c-3.8662109,0-7,3.1337891-7,7c0.0976563,3.78125,3.1953125,7,7,7s6.9013672-3.21875,7-7 C71,53.1337891,67.8662109,50,64,50z"/>
-          </svg>
+          <div id="rocket-wrapper" class="underneath">
+            <svg id="rocket" version="1.1" x="0px" y="0px"
+               width="100%" height="100%" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+              <path fill="#FFFFFF" d="M105.8720703,99.5673828c-3.203125-6.4755859-9.4960938-13.8730469-14.03125-14.6933594 c0.0810547-6.0292969-0.1259766-12.2871094-0.8457031-18.171875c-0.8808594-7.1835938-4.1533203-24.5083008-9.3388672-36.809082 C74.3632813,12.6083984,64.0126953,0.015625,64.0126953,0.015625S53.6621094,12.6083984,46.3691406,29.8930664 c-5.1855469,12.3007813-8.4580078,29.6254883-9.3388672,36.809082c-0.71875,5.8701172-0.9257813,12.1103516-0.8466797,18.125 c-4.5371094,0.7998047-10.8466797,8.2119141-14.0488281,14.703125c-3.0820313,6.2324219-3.4267578,28.4121094-3.4267578,28.4121094 l18.7070313-9.8525391c0,0,0.4462891-1.7773438,1.0253906-4.4970703c0.2382813,1.7080078,0.4130859,2.8095703,0.4628906,3.1123047 v2.8505859c0,2.4628906,1.9873047,4.4599609,4.4394531,4.4599609h41.3369141c2.4521484,0,4.4394531-1.9970703,4.4394531-4.4599609 v-2.8320313c0.0429688-0.2626953,0.2148438-1.3359375,0.4521484-3.0341797 c0.5732422,2.6884766,1.0136719,4.4423828,1.0136719,4.4423828l18.7070313,9.8525391C109.2919922,127.984375,108.9482422,105.7998047,105.8720703,99.5673828z" />
+            </svg>
+            <div id="rocket-window"></div>
+          </div>
         </div>
         <div id="hello">
           <h2><span class="highlight">Hello</span>, how are you?</h2>
@@ -200,29 +219,26 @@
     <script type="text/javascript">
     var wrapper = document.getElementById("wrapper");
     var hello = document.getElementById("hello");
-    var rocket = document.getElementById("rocket");
-    var rocketWindow = document.getElementById("rocket-window");
-    
+    var rocket = document.getElementById("rocket-wrapper");
+
     var flyIn = function () {
       setTimeout(function () {
-        rocket.setAttribute('class', 'flying');
+        rocket.setAttribute('class', '');
         setTimeout(function () {
-          rocketWindow.setAttribute('class', 'animate');
+          rocket.setAttribute('class', 'animate');
         }, 450);
-      }, 250);
+      }, 50);
     };
     
     var flyOut = function (callback) {
-      rocket.setAttribute('class', 'flyaway');
-      rocketWindow.setAttribute('class', '');
-      setTimeout(function(){
+      rocket.setAttribute('class', 'flyover animate');
+      setTimeout(function () {
         rocket.setAttribute('class', '');
         if (callback) {
           callback();
         }
       }, 1000);
     };
-
 
     wrapper.setAttribute('class', 'wrapper show');
     setTimeout(function () {
